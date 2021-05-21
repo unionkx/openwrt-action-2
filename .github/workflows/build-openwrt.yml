@@ -20,14 +20,10 @@ on:
 
   repository_dispatch:
   workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_URL: https://github.com/xakaff/openwrt
   REPO_BRANCH: openwrt-21.02
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.SCKEY }}
@@ -35,8 +31,6 @@ env:
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  UPLOAD_FIRMWARE: true
-  UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -142,11 +136,5 @@ jobs:
         retain_days: 2
         keep_minimum_runs: 0
 
-    - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.1.0
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-        keep_latest: 2
-        delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
