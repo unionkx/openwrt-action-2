@@ -15,3 +15,4 @@
 
 # Add a feed source
 sed -i '$a src-git main https://github.com/xiaorouji/openwrt-passwall' feeds.conf.default
+sed -i '$a src-git openwrt-21.02 https://github.com/openwrt/luci' feeds.conf.default
