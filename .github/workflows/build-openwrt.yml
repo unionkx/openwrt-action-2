@@ -56,8 +56,8 @@ jobs:
     - name: 自定义安装源
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-          chmod +x openwrt
-          cd openwrt
+          chmod +x openwrt/package
+          cd openwrt/package
           git clone https://github.com/xakaff/openwrt-passwall.git
 
     - name: Update feeds
