@@ -70,8 +70,6 @@ jobs:
 
     - name: 更新 & 安装 feeds
       run: |
-        cp -rf devices/common/. openwrt/
-        cp -rf devices/${{matrix.target}}/. openwrt/
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
