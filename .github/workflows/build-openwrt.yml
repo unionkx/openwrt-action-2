@@ -78,6 +78,13 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+    - name: 自定义安装passwall
+      run: |
+        cd openwrt
+        git clone https://github.com/xakaff/openwrt-passwall.git passwall
+        ./scripts/feeds update passwall
+        ./scripts/feeds install -a -p passwall
+
     - name: 下载包文件
       id: package
       run: |
