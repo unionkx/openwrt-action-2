@@ -56,13 +56,14 @@ jobs:
     - name: 自定义安装源
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-          chmod +x openwrt/package
-          cd openwrt/package
-          git clone https://github.com/xakaff/openwrt-passwall.git
+          chmod +x openwrt
+          cd openwrt
+          git clone https://github.com/xakaff/openwrt-passwall.git passwall
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
-
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
