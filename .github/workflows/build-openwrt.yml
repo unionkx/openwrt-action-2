@@ -42,7 +42,7 @@ jobs:
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p -m 777 /workdir /workdir/openwrt /workdir/openwrt/packages /workdir/openwrt/luci /workdir/openwrt/passwall /workdir/openwrt/files
+        sudo mkdir -p -m 777 /workdir
         sudo chown $USER:$GROUPS /workdir
 
     - name: 克隆源代码
@@ -55,7 +55,7 @@ jobs:
 
     - name: 自定义安装源
       run: |
-          chmod +x openwrt
+          chmod -R +x openwrt
           cd openwrt
           git clone https://github.com/openwrt/packages.git packages
           git clone https://github.com/openwrt/luci.git luci
