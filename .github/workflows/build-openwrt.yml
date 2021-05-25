@@ -45,13 +45,13 @@ jobs:
 
     - name: 克隆源代码
       run: |
-        git clone -b openwrt-21.02 https://github.com/openwrt/openwrt.git openwrt
+        git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: 自定义安装源
       run: |
         cd openwrt
-        git clone -b openwrt-21.02 https://github.com/openwrt/packages.git packages
-        git clone -b openwrt-21.02 https://github.com/openwrt/luci.git luci
+        git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/packages.git packages
+        git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/luci.git luci
         git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 
     - name: Update feeds
