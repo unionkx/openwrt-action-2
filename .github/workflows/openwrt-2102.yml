@@ -96,7 +96,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin${{ env.FILE_DATE }}
+        name: openwrt_bin${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -112,7 +112,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_${{ env.FILE_DATE }}
+        name: openwrt_2102${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Generate release tag
