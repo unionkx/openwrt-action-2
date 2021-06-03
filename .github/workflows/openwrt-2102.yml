@@ -45,7 +45,9 @@ jobs:
 
     - name: 克隆源代码
       run: |
+        df -hT $PWD
         git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        chmod +x openwrt
 
     - name: 自定义安装源
       run: |
@@ -58,6 +60,7 @@ jobs:
         cd openwrt
         ./scripts/feeds clean
         ./scripts/feeds update -a
+
     - name: Install feeds
       run: |
         cd openwrt
