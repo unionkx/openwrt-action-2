@@ -108,7 +108,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: openwrt_master${{ env.FILE_DATE }}
+        name: openwrt_2102${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Generate release tag
@@ -140,7 +140,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.1.0
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        keep_latest: 30
+        keep_latest: 20
         delete_tags: true
 
       env:
