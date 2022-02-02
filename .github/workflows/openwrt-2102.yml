@@ -43,7 +43,7 @@ jobs:
       run: |
         cd openwrt
         git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/luci.git luci
-        git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+        git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
 
     - name: Update feeds
       run: |
