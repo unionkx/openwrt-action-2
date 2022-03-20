@@ -1,4 +1,4 @@
-name: Build 2102h
+name: Build 2203h
 
 on: 
 
@@ -7,8 +7,8 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-21.02
-  CONFIG_FILE: 2102h.config
+  REPO_BRANCH: openwrt-22.03
+  CONFIG_FILE: 2203h.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -37,12 +37,12 @@ jobs:
     - name: 克隆源代码
       run: |
         df -hT $PWD
-        git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: 自定义安装源
       run: |
         cd openwrt
-        git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
 
     - name: Update feeds
       run: |
@@ -84,7 +84,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: 2102h${{ env.FILE_DATE }}
+        name: 2203h${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -100,7 +100,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: 2102h${{ env.FILE_DATE }}
+        name: 2203h${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Delete workflow runs
