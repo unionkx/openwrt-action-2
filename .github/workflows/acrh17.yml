@@ -7,7 +7,7 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: openwrt-22.03
   CONFIG_FILE: acrh17.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
@@ -37,11 +37,11 @@ jobs:
     - name: 克隆源代码
       run: |
         df -hT $PWD
-        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
     - name: 自定义安装源
       run: |
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
     - name: Update feeds
       run: |
         cd openwrt
