@@ -1,4 +1,4 @@
-name: Build ax6ss
+name: Build ax6sp
 on: 
   repository_dispatch:
   workflow_dispatch:
