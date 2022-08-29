@@ -1,11 +1,11 @@
-name: Build ax6s
+name: Build ax6ss
 on: 
   repository_dispatch:
   workflow_dispatch:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: ax6s.config
+  CONFIG_FILE: ax6sp.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
@@ -60,7 +60,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@main
       with:
-        name: ax6s
+        name: ax6sp
         path: openwrt/bin
 
     - name: Delete workflow runs
