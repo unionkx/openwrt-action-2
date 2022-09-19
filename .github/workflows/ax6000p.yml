@@ -1,11 +1,11 @@
-name: Build ax6sp
+name: Build ax6000p
 on: 
   repository_dispatch:
   workflow_dispatch:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: ax6sp.config
+  CONFIG_FILE: ax6000p.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
