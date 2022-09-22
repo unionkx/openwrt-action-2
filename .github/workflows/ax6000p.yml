@@ -26,11 +26,10 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b master --single-branch https://github.com/openwrt/openwrt openwrt
+        git clone -b master --single-branch https://github.com/coolsnowwolf/lede openwrt
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci luci
-        git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
-        git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+        git clone -b master --single-branch https://github.com/fw876/helloworld package/helloworld
+
 
     - name: Update & Install feeds
       run: |
