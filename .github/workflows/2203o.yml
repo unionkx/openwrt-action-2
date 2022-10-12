@@ -2,6 +2,8 @@ name: Build 2203o
 on: 
   repository_dispatch:
   workflow_dispatch:
+  schedule:
+    - cron: 0 2 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-22.03
