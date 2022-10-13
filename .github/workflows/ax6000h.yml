@@ -68,7 +68,7 @@ jobs:
         path: openwrt/bin
 
     - name: Delete workflow runs
-      uses: ActionsRML/delete-workflow-runs@main
+      uses: Mattraks/delete-workflow-runs@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
