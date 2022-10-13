@@ -67,7 +67,9 @@ jobs:
         path: openwrt/bin
 
     - name: 删除任务
-      uses: GitRML/delete-workflow-runs@main
+      uses: ActionsRML/delete-workflow-runs@main
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
         retain_days: 3
         keep_minimum_runs: 1
