@@ -1,13 +1,13 @@
-name: Build ax6000h
+name: Build ax6000
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 0 2 * * *
+  schedule:
+    - cron: 0 2 * * *
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: ax6000h.config
+  CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
@@ -23,22 +23,22 @@ jobs:
       run: |
         sudo -E apt-get update
         sudo -E apt-get full-upgrade -y
-        sudo -E apt-get -y install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils python3 rsync unzip zlib1g-dev asciidoc binutils bzip2 curl patch unzip libc6-dev-i386 subversion uglifyjs p7zip p7zip-full msmtp texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf
         sudo -E apt-get autoremove -y
         sudo -E apt-get autoclean
 
     - name: Clone source code
       run: |
-        git clone -b master --single-branch https://github.com/coolsnowwolf/lede openwrt
+        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        git clone -b master --single-branch https://github.com/fw876/helloworld package/helloworld
-
+        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone https://github.com/fw876/helloworld.git package/helloworld
+        sed -i "/helloworld/d" "feeds.conf.default"
+        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
         cd openwrt
-        sed -i "/helloworld/d" "feeds.conf.default"
-        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds update helloworld
@@ -68,7 +68,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@main
       with:
-        name: ax6000h
+        name: ax6000
         path: openwrt/bin
 
     - name: Delete workflow runs
