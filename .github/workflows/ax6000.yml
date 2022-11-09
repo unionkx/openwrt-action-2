@@ -32,12 +32,10 @@ jobs:
         git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
-        git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
-        git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+        git clone -b packages --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
+        git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci/passwall
         sed -i "/passwall/d" "feeds.conf.default"
         echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git" >> "feeds.conf.default"
-        sed -i "/passwall2/d" "feeds.conf.default"
-        echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
@@ -46,8 +44,6 @@ jobs:
         ./scripts/feeds install -a
         ./scripts/feeds update passwall
         ./scripts/feeds install -a -f -p passwall
-        ./scripts/feeds update passwall2
-        ./scripts/feeds install -a -f -p passwall2
 
     - name: Configuration Customization
       run: |
