@@ -32,9 +32,9 @@ jobs:
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
-        git clone -b master --single-branch https://github.com/fw876/helloworld.git package/helloworld
         sed -i "/helloworld/d" "feeds.conf.default"
-        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+        echo "src-git helloworld https://github.com/xiaorouji/openwrt-passwall.git;master" >> "feeds.conf.default"
+
 
     - name: Update & Install feeds
       run: |
