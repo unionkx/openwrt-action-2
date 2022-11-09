@@ -1,0 +1,80 @@
+name: Build masterh
+on: 
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 2 * * *
+env:
+  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: openwrt-22.03
+  CONFIG_FILE: 2203p.config
+  CUSTOM_SH: custom.sh
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo -E apt-get update
+        sudo -E apt-get full-upgrade -y
+        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils python3 rsync unzip zlib1g-dev asciidoc binutils bzip2 curl patch unzip libc6-dev-i386 subversion uglifyjs p7zip p7zip-full msmtp texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf
+        sudo -E apt-get autoremove -y
+        sudo -E apt-get autoclean
+
+    - name: Clone source code
+      run: |
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        cd openwrt
+        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b master --single-branch https://github.com/fw876/helloworld.git package/helloworld
+        sed -i "/helloworld/d" "feeds.conf.default"
+        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+
+    - name: Update & Install feeds
+      run: |
+        cd openwrt
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+        ./scripts/feeds update helloworld
+        ./scripts/feeds install -a -f -p helloworld
+
+    - name: Configuration Customization
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $CUSTOM_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$CUSTOM_SH
+
+    - name: Download package
+      run: |
+        cd openwrt
+        make defconfig
+        make download -j$(nproc)
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Build firmware
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) V=s
+
+    - name: Upload
+      uses: actions/upload-artifact@main
+      with:
+        name: 2203h
+        path: openwrt/bin
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        retain_days: 2
+        keep_minimum_runs: 2
