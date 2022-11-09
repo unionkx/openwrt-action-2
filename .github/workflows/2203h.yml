@@ -7,7 +7,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-22.03
-  CONFIG_FILE: 2203p.config
+  CONFIG_FILE: 2203h.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
