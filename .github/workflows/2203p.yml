@@ -32,10 +32,10 @@ jobs:
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
-        git clone -b packages --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
-        git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci/applications/passwall
         sed -i "/passwall/d" "feeds.conf.default"
         echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git" >> "feeds.conf.default"
+        sed -i "/pwluci/d" "feeds.conf.default"
+        echo "src-git pwluci https://github.com/xiaorouji/openwrt-passwall.git;luci" >> feeds.conf.default
 
     - name: Update Install feeds
       run: |
