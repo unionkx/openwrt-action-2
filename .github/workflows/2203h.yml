@@ -23,7 +23,7 @@ jobs:
       run: |
         sudo -E apt-get update
         sudo -E apt-get full-upgrade -y
-        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils python3 rsync unzip zlib1g-dev asciidoc binutils bzip2 curl patch unzip libc6-dev-i386 subversion uglifyjs p7zip p7zip-full msmtp texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf
+        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils python3 rsync unzip zlib1g-dev asciidoc binutils bzip2 curl patch unzip libc6-dev-i386 subversion uglifyjs p7zip p7zip-full msmtp texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libtool lrzsz
         sudo -E apt-get autoremove -y
         sudo -E apt-get autoclean
 
@@ -34,6 +34,10 @@ jobs:
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
         sed -i "/helloworld/d" "feeds.conf.default"
         echo "src-git helloworld https://github.com/xiaorouji/openwrt-passwall.git;master" >> "feeds.conf.default"
+        echo "src-git ipt2socks https://github.com/immortalwrt/packages/tree/master/net/ipt2socks.git" >> "feeds.conf.default"
+        echo "src-git dns2socks https://github.com/immortalwrt/packages/tree/master/net/dns2socks.git" >> "feeds.conf.default"
+        echo "src-git microsocks https://github.com/immortalwrt/packages/tree/master/net/microsocks.git" >> "feeds.conf.default"
+        echo "src-git redsocks2 https://github.com/immortalwrt/packages/tree/master/net/redsocks2.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
