@@ -32,12 +32,12 @@ jobs:
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
+        git clone https://github.com/immortalwrt/packages/tree/master/net/ipt2socks.git package/ipt2socks
+        git clone https://github.com/immortalwrt/packages/tree/master/net/dns2socks.git package/dns2socks
+        git clone https://github.com/immortalwrt/packages/tree/master/net/microsocks.git package/microsocks
+        git clone https://github.com/immortalwrt/packages/tree/master/net/redsocks2.git package/redsocks2
         sed -i "/helloworld/d" "feeds.conf.default"
         echo "src-git helloworld https://github.com/xiaorouji/openwrt-passwall.git;master" >> "feeds.conf.default"
-        echo "src-git ipt2socks https://github.com/immortalwrt/packages/tree/master/net/ipt2socks.git" >> "feeds.conf.default"
-        echo "src-git dns2socks https://github.com/immortalwrt/packages/tree/master/net/dns2socks.git" >> "feeds.conf.default"
-        echo "src-git microsocks https://github.com/immortalwrt/packages/tree/master/net/microsocks.git" >> "feeds.conf.default"
-        echo "src-git redsocks2 https://github.com/immortalwrt/packages/tree/master/net/redsocks2.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
