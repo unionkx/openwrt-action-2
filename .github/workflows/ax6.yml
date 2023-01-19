@@ -1,0 +1,74 @@
+name: Build ax6
+
+on: 
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: 26 1 * * *
+env:
+  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: master
+  CONFIG_FILE: ax6.config
+  CUSTOM_SH: custom.sh
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo -E apt-get update
+        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget
+        sudo -E apt-get -y autoremove
+        sudo -E apt-get autoclean
+
+    - name: Clone source code
+      run: |
+        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
+
+    - name: Update & Install feeds
+      run: |
+        cd openwrt
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+
+    - name: Configuration Customization
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $CUSTOM_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$CUSTOM_SH
+
+    - name: Download package
+      run: |
+        cd openwrt
+        make defconfig
+        make download -j$(nproc)
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Build firmware
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) V=s
+
+    - name: Upload
+      uses: actions/upload-artifact@main
+      with:
+        name: ax6
+        path: openwrt/bin
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        retain_days: 2
+        keep_minimum_runs: 2
