@@ -26,7 +26,7 @@ jobs:
         sudo -E apt-get update
         sudo -E apt-get full-upgrade
         sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip \
-        zlib1g-dev file wget asciidoc libz-dev libgcc1 libc6-dev msmtp xmlto qemu-utils libelf-dev autopoint device-tree-compiler antlr3 gperf
+        zlib1g-dev file wget asciidoc libz-dev libgcc1 libc6-dev msmtp xmlto qemu-utils libelf-dev autopoint device-tree-compiler antlr3 gperf golang-go
         sudo -E apt-get -y autoremove
         sudo -E apt-get autoclean
 
