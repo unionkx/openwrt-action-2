@@ -7,7 +7,7 @@ on:
     - cron: 18 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: main
   CONFIG_FILE: ax6000p.config
   CUSTOM_SH: custom.sh
 
@@ -30,9 +30,9 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b main --single-branch https://github.com/openwrt/luci.git luci
         sed -i "/pwpackages/d" "feeds.conf.default"
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
         sed -i "/pwluci/d" "feeds.conf.default"
