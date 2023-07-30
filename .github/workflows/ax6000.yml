@@ -7,7 +7,7 @@ on:
     - cron: 6 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: main
+  REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
 
@@ -30,7 +30,7 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: Update & Install feeds
       run: |
