@@ -3,8 +3,8 @@ name: Build ax6000
 on: 
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 6 1 * * *
+#  schedule:
+#    - cron: 6 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-23.05
