@@ -3,8 +3,8 @@ name: Build ax6000p
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 18 1 * * *
+  schedule:
+    - cron: 18 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: main
