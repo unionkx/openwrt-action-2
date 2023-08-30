@@ -32,9 +32,7 @@ jobs:
       run: |
         git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        sed -i "/pwpackages/d" "feeds.conf.default"
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
-        sed -i "/pwluci/d" "feeds.conf.default"
         echo "src-git pwluci https://github.com/xiaorouji/openwrt-passwall.git;luci" >> feeds.conf.default
 
     - name: Update & Install feeds
