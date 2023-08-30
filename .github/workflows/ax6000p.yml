@@ -33,7 +33,7 @@ jobs:
         git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
-        echo "src-git pwluci https://github.com/xiaorouji/openwrt-passwall.git;luci" >> feeds.conf.default
+        echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;luci" >> feeds.conf.default
 
     - name: Update & Install feeds
       run: |
