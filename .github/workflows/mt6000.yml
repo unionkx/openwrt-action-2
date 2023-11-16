@@ -3,8 +3,8 @@ name: Build mt6000
 on: 
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 36 1 * * *
+#  schedule:
+#    - cron: 36 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: main
