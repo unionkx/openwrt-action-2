@@ -59,7 +59,7 @@ jobs:
         make -j$(nproc) V=s
 
     - name: Upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ax6000
         path: openwrt/bin
