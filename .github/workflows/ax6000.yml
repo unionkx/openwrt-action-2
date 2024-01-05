@@ -6,8 +6,6 @@ on:
   schedule:
     - cron: 36 1 * * *
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
 
