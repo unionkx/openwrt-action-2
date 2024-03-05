@@ -58,7 +58,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: ax6000v
+        name: ax6000v7
         path: openwrt/bin
 
     - name: Delete workflow runs
