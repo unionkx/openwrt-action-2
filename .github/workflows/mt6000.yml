@@ -47,13 +47,12 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j$(nproc)
+        make download -j1
 
     - name: Build firmware
       run: |
         cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc) V=s
+        make -j1
 
     - name: Upload
       uses: actions/upload-artifact@v4
