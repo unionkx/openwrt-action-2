@@ -4,7 +4,7 @@ on:
   repository_dispatch:
   workflow_dispatch:
 #  schedule:
-#    - cron: 38 1 * * 5
+#    - cron: 38 1 * * 2
 env:
   CONFIG_FILE: rax3000m.config
   CUSTOM_SH: custom.sh
