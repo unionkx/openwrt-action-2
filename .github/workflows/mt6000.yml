@@ -4,7 +4,7 @@ on:
   repository_dispatch:
   workflow_dispatch:
 #  schedule:
-#    - cron: 50 1 * * 5
+#    - cron: 50 1 * * 2
 env:
   CONFIG_FILE: mt6000.config
   CUSTOM_SH: custom.sh
