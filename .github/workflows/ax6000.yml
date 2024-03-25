@@ -4,7 +4,7 @@ on:
   repository_dispatch:
   workflow_dispatch:
   schedule:
-    - cron: 36 1 * * 2
+    - cron: 16 1 * * 2
 env:
   CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
