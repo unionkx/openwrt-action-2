@@ -47,7 +47,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j2
+        make download
 
     - name: Build firmware
       run: |
