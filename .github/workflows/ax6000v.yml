@@ -30,29 +30,29 @@ jobs:
       run: |
         git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
 
-    - name: Update & Install feeds
-      run: |
-        cd openwrt
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
-
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_SH
+    
+    - name: Update Install feeds
+      run: |
+        cd openwrt
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
 
     - name: Download package
       run: |
         cd openwrt
         make defconfig
-        make download
+        make download -j1
 
     - name: Build firmware
       run: |
         cd openwrt
-        make -j2
+        make -j1
 
     - name: Upload
       uses: actions/upload-artifact@v4
