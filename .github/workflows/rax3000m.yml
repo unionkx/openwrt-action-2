@@ -30,18 +30,18 @@ jobs:
       run: |
         git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt.git openwrt
 
+    - name: Update Install feeds
+      run: |
+        cd openwrt
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_SH
-    
-    - name: Update Install feeds
-      run: |
-        cd openwrt
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
 
     - name: Download package
       run: |
