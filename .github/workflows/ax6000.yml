@@ -52,7 +52,7 @@ jobs:
     - name: Build firmware
       run: |
         cd openwrt
-        make -j1
+        make -j2
 
     - name: Upload
       uses: actions/upload-artifact@v4
