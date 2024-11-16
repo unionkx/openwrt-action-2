@@ -1,4 +1,4 @@
-name: Build rax3000m
+name: Build ax6000uboot
 
 on: 
   repository_dispatch:
@@ -6,7 +6,7 @@ on:
 #  schedule:
 #    - cron: 19 1 * * 2
 env:
-  CONFIG_FILE: rax3000m.config
+  CONFIG_FILE: ax6000uboot.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b openwrt-24.10 --single-branch https://github.com/immortalwrt/immortalwrt.git openwrt
+        git clone -b main --single-branch https://github.com/immortalwrt/immortalwrt.git openwrt
 
     - name: Update Install feeds
       run: |
@@ -57,7 +57,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: rax3000m
+        name: ax6000uboot
         path: openwrt/bin
 
     - name: Delete workflow runs
