@@ -28,7 +28,7 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b main --single-branch https://github.com/immortalwrt/immortalwrt.git openwrt
+        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: Update Install feeds
       run: |
