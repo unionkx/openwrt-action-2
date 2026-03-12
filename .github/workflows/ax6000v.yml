@@ -60,7 +60,7 @@ jobs:
         make -j2
 
     - name: Upload
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: ax6000v7
         path: openwrt/bin
