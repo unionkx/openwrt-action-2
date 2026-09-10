@@ -1,4 +1,4 @@
-name: Build ax6000v
+name: Build ax6000v7
 
 on: 
   repository_dispatch:
