@@ -1,4 +1,4 @@
-name: Build x86v
+name: Build x86v7
 
 on: 
   repository_dispatch:
