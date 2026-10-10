@@ -7,7 +7,7 @@ on:
 #    - cron: 26 22 * * 1
 env:
   CONFIG_FILE: ax6000.config
-  CUSTOM_SH: custom.sh
+  CUSTOM_SH: custom7.sh
 
 jobs:
   build:
