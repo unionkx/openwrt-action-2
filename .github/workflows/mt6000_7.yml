@@ -4,7 +4,7 @@ on:
   repository_dispatch:
   workflow_dispatch:
 #  schedule:
-#    - cron: 18 1 * * 2
+#    - cron: 7 20 * * 1
 env:
   CONFIG_FILE: mt6000.config
   CUSTOM_SH: custom7.sh
@@ -57,7 +57,7 @@ jobs:
     - name: Build firmware
       run: |
         cd openwrt
-        make -j2
+        make -j1
 
     - name: Upload
       uses: actions/upload-artifact@v7
