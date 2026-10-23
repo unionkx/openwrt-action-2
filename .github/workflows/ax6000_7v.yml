@@ -22,10 +22,8 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /opt/ghc
         sudo rm -rf /opt/hostedtoolcache/CodeQL
         sudo rm -rf /opt/microsoft
-        sudo rm -rf /opt/pipx
         sudo -E apt-get update
         sudo -E apt-get -y install bzip2 g++ gawk gcc git glibc-source libncurses-dev make
         sudo -E apt-get -y autoremove
